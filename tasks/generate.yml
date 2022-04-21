@@ -13,7 +13,7 @@
         - ssh-keys-generate-directories
 
     - name: generate | generate private ssh key
-      shell: "{{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}"
+      ansible.builtin.shell: "{{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}"
       tags:
         - ssh-keys-generate-private-keys
         - skip_ansible_lint
