@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Publish to Galaxy
-        uses: robertdebock/galaxy-action@1.1.0
+        uses: buluma/galaxy-action@v1.0.3
         with:
           galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}
+          git_branch: master
