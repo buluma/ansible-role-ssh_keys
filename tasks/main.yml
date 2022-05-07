@@ -5,11 +5,11 @@
     name: "{{ openssl_packages }}"
     state: present
 
-# install setuptools
+# install setuptools/python3-cffi
 - name: Install a list of packages
   apt:
     pkg:
-    - setuptools
+      - setuptools
 
 - import_tasks: generate.yml
   tags:
