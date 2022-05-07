@@ -12,7 +12,7 @@ molecule:
   stage: build
   allow_failure: true
   script:
-    - image=${image} tag=${tag} molecule -v test
+    - image=${image} tag=${tag} molecule -vv test
   retry: 1
   parallel:
     matrix:
@@ -31,7 +31,7 @@ testing:
   stage: test
   needs: []
   script:
-    - image=${image} tag=${tag} molecule -v test
+    - image=${image} tag=${tag} molecule -vv test
   rules:
     - if: $CI_COMMIT_REF_NAME == "testing"
   retry: 1
