@@ -4,7 +4,7 @@ Manage ssh public key authentication (public / private / authorized keys and kno
 
 |GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
 |------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-ssh_keys/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ssh_keys/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-ssh_keys/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-ssh_keys)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/buluma/ssh_keys)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/ssh_keys)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/pulls/)|
+|[![github](https://github.com/buluma/ansible-role-ssh_keys/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ssh_keys/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-ssh_keys/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-ssh_keys)|[![quality](https://img.shields.io/ansible/quality/59113)](https://galaxy.ansible.com/buluma/ssh_keys)|[![downloads](https://img.shields.io/ansible/role/d/59113)](https://galaxy.ansible.com/buluma/ssh_keys)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -15,6 +15,25 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
   hosts: all
   become: yes
   gather_facts: yes
+
+  vars:
+    ssh_keys_generate_keys:
+      - path: ../../../files/ssh-keys/id_rsa
+        comment: RSA key
+    ssh_keys_private_keys:
+      - owner: root
+        src: ../../../files/ssh-keys/id_rsa
+    ssh_keys_public_keys:
+      - owner: root
+        src: ../../../files/ssh-keys/id_rsa.pub
+    ssh_keys_authorized_keys:
+      - owner: root
+        src: ../../../files/ssh-keys/id_rsa.pub
+    ssh_keys_known_hosts:
+      - hostname: github.com
+        enctype: ssh-rsa
+        fingerprint: 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
+
   roles:
     - buluma.ssh_keys
 ```
@@ -22,10 +41,26 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
 ```yaml
 ---
-- name: Prepare
+- name: prepare
   hosts: all
-  become: true
-  tasks: []
+  become: yes
+  gather_facts: no
+
+  roles:
+    - role: buluma.bootstrap
+    - role: buluma.core_dependencies
+    - role: buluma.ca_certificates
+    - role: buluma.setuptools
+    - role: buluma.openssl
+
+  tasks:
+    - name: debian | apt-get install *.deb
+      ansible.builtin.raw: |
+        set -eu
+        DEBIAN_FRONTEND=noninteractive apt-get install -y bzip2 ca-certificates curl gcc gnupg gzip hostname iproute2 passwd procps python3 python3-apt python3-jmespath python3-lxml python3-pip python3-setuptools python3-venv python3-virtualenv python3-wheel rsync sudo tar unzip util-linux xz-utils zip
+      when: ansible_os_family | lower == "debian"
+      changed_when: false
+      failed_when: false
 ```
 
 
@@ -47,10 +82,21 @@ ssh_keys_known_hosts: []
 
 - pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-ssh_keys/blob/main/requirements.txt).
 
+## [Status of used roles](#status-of-requirements)
+
+The following roles are used to prepare a system. You can prepare your system in another way.
+
+| Requirement | GitHub | GitLab |
+|-------------|--------|--------|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
+|[buluma.core_dependencies](https://galaxy.ansible.com/buluma/core_dependencies)|[![Build Status GitHub](https://github.com/buluma/ansible-role-core_dependencies/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-core_dependencies/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-core_dependencies/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-core_dependencies)|
+|[buluma.ca_certificates](https://galaxy.ansible.com/buluma/ca_certificates)|[![Build Status GitHub](https://github.com/buluma/ansible-role-ca_certificates/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ca_certificates/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-ca_certificates/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-ca_certificates)|
+|[buluma.openssl](https://galaxy.ansible.com/buluma/openssl)|[![Build Status GitHub](https://github.com/buluma/ansible-role-openssl/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-openssl/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-openssl/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-openssl)|
+|[buluma.setuptools](https://galaxy.ansible.com/buluma/setuptools)|[![Build Status GitHub](https://github.com/buluma/ansible-role-setuptools/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-setuptools/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-setuptools/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-setuptools)|
 
 ## [Context](#context)
 
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.co.ke/) for further information.
+This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://buluma.github.io/) for further information.
 
 Here is an overview of related roles:
 
