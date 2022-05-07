@@ -15,6 +15,7 @@ _ssh_keys_generate_keys_command: >-
 
 openssl_packages:
   - openssl
+  - libffi
   - libffi-dev
   - libffi6
   - python3-openssl
