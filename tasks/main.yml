@@ -5,6 +5,12 @@
     name: "{{ openssl_packages }}"
     state: present
 
+# install setuptools
+- name: Install a list of packages
+  apt:
+    pkg:
+    - setuptools
+
 - import_tasks: generate.yml
   tags:
     - configuration
