@@ -7,7 +7,7 @@
 
 # install setuptools/python3-cffi
 - name: Install a list of packages
-  apt:
+  ansible.builtin.apt:
     pkg:
       - setuptools
 
