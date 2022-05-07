@@ -93,11 +93,12 @@
     state: present
 
 # install setuptools/python3-cffi
-- name: Install a list of packages
-  ansible.builtin.apt:
-    pkg:
-      # - setuptools
-      - libffi
+# - name: Install a list of packages (debian)
+#   ansible.builtin.apt:
+#     pkg:
+#       # - setuptools
+#       - libffi
+#   when: ansible_os_family | lower == "debian"
 
 - import_tasks: generate.yml
   tags:
