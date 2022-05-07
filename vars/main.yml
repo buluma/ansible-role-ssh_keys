@@ -12,3 +12,8 @@ _ssh_keys_generate_keys_command: >-
     {{ '-passout stdin' if item.passphrase is defined else '' }} \
     {{ item.size | default(4096) }} \
     {{  '<<< "' + item.passphrase + '"' if item.passphrase is defined else '' }}
+
+openssl_packages:
+  - openssl
+  - python3-openssl
+  - ca-certificates
