@@ -4,6 +4,7 @@ roles:
   - name: buluma.core_dependencies
   - name: buluma.ca_certificates
   - name: buluma.openssl
+  - name: buluma.pip
   - name: buluma.setuptools
 collections:
   - name: ansible.posix
