@@ -13,7 +13,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 ---
 - name: Converge
   hosts: all
-  become: yes
+  become: no
   gather_facts: yes
 
   vars:
@@ -21,13 +21,13 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       - path: ../../../files/ssh-keys/id_rsa
         comment: RSA key
     ssh_keys_private_keys:
-      - owner: root
+      - owner: shadowwalker
         src: ../../../files/ssh-keys/id_rsa
     ssh_keys_public_keys:
-      - owner: root
+      - owner: shadowwalker
         src: ../../../files/ssh-keys/id_rsa.pub
     ssh_keys_authorized_keys:
-      - owner: root
+      - owner: shadowwalker
         src: ../../../files/ssh-keys/id_rsa.pub
     ssh_keys_known_hosts:
       - hostname: github.com
@@ -51,16 +51,7 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
     - role: buluma.core_dependencies
     - role: buluma.ca_certificates
     - role: buluma.setuptools
-    - role: buluma.openssl
-
-  tasks:
-    - name: debian | apt-get install *.deb
-      ansible.builtin.raw: |
-        set -eu
-        DEBIAN_FRONTEND=noninteractive apt-get install -y bzip2 ca-certificates curl gcc gnupg gzip hostname iproute2 passwd procps python3 python3-apt python3-jmespath python3-lxml python3-pip python3-setuptools python3-venv python3-virtualenv python3-wheel rsync sudo tar unzip util-linux xz-utils zip
-      when: ansible_os_family | lower == "debian"
-      changed_when: false
-      failed_when: false
+    # - role: buluma.openssl
 ```
 
 
@@ -111,7 +102,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/b
 |ubuntu|all|
 |debian|all|
 
-The minimum version of Ansible required is 2.9.0, tests have been done to:
+The minimum version of Ansible required is 2.9, tests have been done to:
 
 - The previous version.
 - The current version.
@@ -127,7 +118,7 @@ If you find issues, please register them in [GitHub](https://github.com/buluma/a
 
 ## [License](#license)
 
-MIT
+Apache-2.0
 
 ## [Author Information](#author-information)
 
