@@ -97,4 +97,5 @@
     - role: buluma.core_dependencies
     - role: buluma.pip
     - role: buluma.ca_certificates
+    - role: buluma.openvpn
     - role: buluma.openssl
