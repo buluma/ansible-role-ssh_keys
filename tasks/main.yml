@@ -1,6 +1,24 @@
 # tasks file
 ---
 
+- name: Installing packages
+  ansible.builtin.package:
+    name: "{{ openssl_packages }}"
+    state: present
+
+# install setuptools/python3-cffi
+# - name: Install a list of packages (debian)
+#   ansible.builtin.apt:
+#     pkg:
+#       # - setuptools
+#       - libffi
+#   when: ansible_os_family | lower == "debian"
+
+- name: Install openssl packages
+  ansible.builtin.package:
+    pkg:
+      - openssl
+
 - import_tasks: generate.yml
   tags:
     - configuration

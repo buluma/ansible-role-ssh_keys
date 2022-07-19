@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-ssh_keys/tree/HEAD)
+## [0.1.0](https://github.com/buluma/ansible-role-ssh_keys/tree/0.1.0) (2022-04-21)
 
-[Full Changelog](https://github.com/buluma/ansible-role-ssh_keys/compare/cf3d5c179d37ff179b479fde1e07a046284cbe63...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-ssh_keys/compare/cf3d5c179d37ff179b479fde1e07a046284cbe63...0.1.0)
 
 **Merged pull requests:**
 

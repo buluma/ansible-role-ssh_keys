@@ -13,3 +13,4 @@ exclude_paths:
 warn_list:
   - '106'
   - '204'
+  - unnamed-task  # All tasks should be named.
