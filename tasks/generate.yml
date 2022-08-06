@@ -1,6 +1,7 @@
 # tasks file
 ---
-- block:
+- name: generte ssh keys
+  block:
     - name: generate | create ssh key generation directory
       ansible.builtin.file:
         path: "{{ item.path | dirname }}"
