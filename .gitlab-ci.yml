@@ -1,5 +1,5 @@
 ---
-image: "buluma/github-action-molecule:4.0.6"
+image: "buluma/github-action-molecule:4.0.9"
 
 services:
   - docker:dind
@@ -9,25 +9,33 @@ variables:
   PY_COLORS: 1
 
 molecule:
+  stage: build
+  allow_failure: true
   script:
-    - image=${image} tag=${tag} molecule test
+    - if [ -f tox.ini ] ; then tox ; fi
+    - if [ ! -f tox.ini ] ; then molecule test ; fi
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "master"
   retry: 1
   parallel:
     matrix:
       - image: "docker-ubuntu-systemd"
         tag: "latest"
       - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "docker-ubuntu-systemd"
         tag: "focal"
+      - image: "docker-ubuntu-systemd"
+        tag: "bionic"
       - image: "debian-systemd"
         tag: "latest"
       - image: "debian-systemd"
         tag: "bookworm"
 
 testing:
+  stage: test
+  needs: []
   script:
-    - image=${image} tag=${tag} molecule test
+    - if [ -f tox.ini ] ; then tox ; fi
+    - if [ ! -f tox.ini ] ; then molecule test ; fi
   rules:
     - if: $CI_COMMIT_REF_NAME == "testing"
   retry: 1
@@ -36,30 +44,9 @@ testing:
       - image: "docker-ubuntu-systemd"
         tag: "latest"
       - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "docker-ubuntu-systemd"
         tag: "focal"
-      - image: "debian-systemd"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "bookworm"
-
-galaxy:
-  script:
-    - ansible-galaxy role info buluma.ssh_keys
-
-role_testing:
-  script:
-    - image=${image} tag=${tag} ansible-galaxy install buluma.ssh_keys
-  retry: 1
-  parallel:
-    matrix:
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
       - image: "docker-ubuntu-systemd"
         tag: "bionic"
-      - image: "docker-ubuntu-systemd"
-        tag: "focal"
       - image: "debian-systemd"
         tag: "latest"
       - image: "debian-systemd"
