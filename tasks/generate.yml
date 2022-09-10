@@ -1,8 +1,8 @@
 # tasks file
 ---
-- name: generte ssh keys
+- name: Generte ssh keys
   block:
-    - name: generate | create ssh key generation directory
+    - name: Generate | create ssh key generation directory
       ansible.builtin.file:
         path: "{{ item.path | dirname }}"
         owner: root
@@ -13,7 +13,7 @@
       tags:
         - ssh-keys-generate-directories
 
-    - name: generate | generate private ssh key
+    - name: Generate | generate private ssh key
       ansible.builtin.shell: "{{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}"
       tags:
         - ssh-keys-generate-private-keys
@@ -23,7 +23,7 @@
         item.path is not file
       with_items: "{{ ssh_keys_generate_keys }}"
 
-    - name: generate | set permissions on keys
+    - name: Generate | set permissions on keys
       ansible.builtin.file:
         path: "{{ item.path }}"
         owner: root
@@ -33,7 +33,7 @@
       tags:
         - ssh-keys-generate-permissions
 
-    - name: generate | generate public ssh key
+    - name: Generate | generate public ssh key
       community.crypto.openssl_publickey:
         path: "{{ item.path }}.pub"
         force: "{{ item.force | default(false) }}"

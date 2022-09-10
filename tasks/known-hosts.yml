@@ -1,6 +1,6 @@
 # tasks file
 ---
-- name: known-hosts | stat directories
+- name: Known-hosts | stat directories
   ansible.builtin.stat:
     path: "{{ item }}/"
   register: _stat_directories
@@ -10,7 +10,7 @@
     - ssh-keys-known-hosts-directories
     - ssh-keys-known-hosts-directories-stat
 
-- name: known-hosts | create directories
+- name: Known-hosts | create directories
   ansible.builtin.file:
     path: "{{ item.item }}"
     state: directory
@@ -23,7 +23,7 @@
     - ssh-keys-known-hosts-directories
     - ssh-keys-known-hosts-directories-create
 
-- name: known-hosts | update file
+- name: Known-hosts | update file
   ansible.builtin.template:
     src: "{{ ssh_keys_known_hosts_path.lstrip('/') }}.j2"
     dest: "{{ ssh_keys_known_hosts_path }}"
