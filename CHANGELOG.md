@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-ssh_keys/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-ssh_keys/compare/0.1.0...HEAD)
+
+**Merged pull requests:**
+
+- Bump ubuntu from 20.04 to 22.04 [\#6](https://github.com/buluma/ansible-role-ssh_keys/pull/6) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.1.0](https://github.com/buluma/ansible-role-ssh_keys/tree/0.1.0) (2022-04-21)
 
 [Full Changelog](https://github.com/buluma/ansible-role-ssh_keys/compare/cf3d5c179d37ff179b479fde1e07a046284cbe63...0.1.0)
