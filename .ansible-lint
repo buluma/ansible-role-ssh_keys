@@ -15,3 +15,4 @@ warn_list:
   - '106'
   - '204'
   - command-instead-of-shell
+  - jinja
