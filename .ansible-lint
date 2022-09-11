@@ -9,7 +9,9 @@ exclude_paths:
   - ./molecule/default/collections.yml
   - ./.tox
   - ./.cache
+  - ./tests
 
 warn_list:
   - '106'
   - '204'
+  - command-instead-of-shell
