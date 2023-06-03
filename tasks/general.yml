@@ -1,6 +1,6 @@
 # tasks file
 ---
-- name: General | create ssh directory
+- name: general | create ssh directory
   ansible.builtin.file:
     path: "{{ (item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(ssh_keys_private_key_filename)))) | dirname }}"
     state: directory
@@ -13,7 +13,7 @@
     - ssh-keys-general-create-ssh-directories
     - ssh-keys-general-create-ssh-directories-private-keys
 
-- name: General | create ssh directory
+- name: general | create ssh directory
   ansible.builtin.file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
     state: directory
