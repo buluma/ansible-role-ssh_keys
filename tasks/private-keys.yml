@@ -1,6 +1,6 @@
 # tasks file
 ---
-- name: private-keys | add
+- name: private-keys | Add private keys.
   ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(ssh_keys_private_key_filename))) }}"
@@ -12,7 +12,7 @@
   tags:
     - ssh-keys-private-keys-add
 
-- name: private-keys | remove
+- name: private-keys | Remove private keys.
   ansible.builtin.file:
     path: "{{ item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(ssh_keys_private_key_filename))) }}"
     state: absent
