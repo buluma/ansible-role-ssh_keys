@@ -2,9 +2,9 @@
 
 Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems
 
-|GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
-|------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-ssh_keys/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ssh_keys/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-ssh_keys/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-ssh_keys)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/buluma/ssh_keys)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/ssh_keys)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/pulls/)|
+|GitHub|GitLab|Downloads|Version|Issues|Pull Requests|
+|------|------|-------|-------|------|-------------|
+|[![github](https://github.com/buluma/ansible-role-ssh_keys/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-ssh_keys/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-ssh_keys/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-ssh_keys)|[![downloads](https://img.shields.io/ansible/role/d/4843)](https://galaxy.ansible.com/buluma/ssh_keys)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-ssh_keys.svg)](https://github.com/buluma/ansible-role-ssh_keys/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
