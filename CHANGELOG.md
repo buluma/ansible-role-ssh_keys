@@ -4,6 +4,11 @@
 
 [Full Changelog](https://github.com/buluma/ansible-role-ssh_keys/compare/0.1.0...HEAD)
 
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#20](https://github.com/buluma/ansible-role-ssh_keys/issues/20)
+- Update action [\#19](https://github.com/buluma/ansible-role-ssh_keys/issues/19)
+
 **Merged pull requests:**
 
 - Bump ubuntu from 20.04 to 22.04 [\#6](https://github.com/buluma/ansible-role-ssh_keys/pull/6) ([dependabot[bot]](https://github.com/apps/dependabot))
