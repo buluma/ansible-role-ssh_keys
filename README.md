@@ -1,4 +1,4 @@
-# [ssh_keys](#ssh_keys)
+# [Ansible role ssh_keys](#ssh_keys)
 
 Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems
 
