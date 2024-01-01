@@ -48,7 +48,7 @@ jobs:
           - image: "docker-ubuntu-systemd"
             tag: "focal"
           - image: "docker-ubuntu-systemd"
-            tag: "bionic"
+            tag: "lunar"
           - image: "debian-systemd"
             tag: "latest"
           - image: "debian-systemd"
