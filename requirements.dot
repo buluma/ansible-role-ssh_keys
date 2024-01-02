@@ -1,0 +1,11 @@
+digraph PhiloDilemma {
+  label = "Michael Buluma" ;
+  overlap=false
+  {
+    "ssh_keys" [fillcolor=yellow style=filled penwidth=3]
+    "buluma.bootstrap" [fillcolor=green style=filled]
+    "buluma.core_dependencies" [fillcolor=green style=filled]
+  }
+  "ssh_keys" -> "buluma.bootstrap"
+  "ssh_keys" -> "buluma.core_dependencies"
+}
