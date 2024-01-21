@@ -1,47 +1,48 @@
 # tasks file
 ---
-- name: generate | Generate ssh keys
+- name: generate
   delegate_to: localhost
   become: "{{ ssh_keys_generate_keys_become }}"
   block:
-    - name: generate | Create ssh key generation directory
+    - name: generate | create ssh key generation directory
       ansible.builtin.file:
         path: "{{ item.path | dirname }}"
-        owner: root
-        group: root
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
         mode: 0700
         state: directory
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
         - ssh-keys-generate-directories
 
-    - name: generate | Generate private ssh key
-      ansible.builtin.command: "{{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}"
-      tags:
-        - ssh-keys-generate-private-keys
-        - skip_ansible_lint
+    - name: generate | generate private ssh key
+      ansible.builtin.shell: >
+        {{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}
+      with_items: "{{ ssh_keys_generate_keys }}"
       when: >-
         item.force | default(false) | bool or
         item.path is not file
-      with_items: "{{ ssh_keys_generate_keys }}"
+      tags:
+        - ssh-keys-generate-private-keys
+        - skip_ansible_lint
 
-    - name: generate | Set permissions on keys
+    - name: generate | set permissions on keys
       ansible.builtin.file:
         path: "{{ item.path }}"
-        owner: root
-        group: root
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
         mode: "{{ item.mode | default('0600') }}"
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
         - ssh-keys-generate-permissions
 
-    - name: generate | Generate public ssh key
+    - name: generate | generate public ssh key
       community.crypto.openssl_publickey:
         path: "{{ item.path }}.pub"
         force: "{{ item.force | default(false) }}"
         format: "{{ item.format | default('OpenSSH') }}"
-        owner: root
-        group: root
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
         mode: "{{ item.mode | default('0600') }}"
         privatekey_passphrase: "{{ item.passphrase | default(omit) }}"
         privatekey_path: "{{ item.path }}"
