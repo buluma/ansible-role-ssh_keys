@@ -18,3 +18,8 @@ skip_list:
 
 enable_list:
   - name[prefix]
+
+warn_list:
+  - role-name
+  - name[play]
+  - name[casing]
