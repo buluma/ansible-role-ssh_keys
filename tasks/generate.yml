@@ -5,9 +5,9 @@
   become: "{{ ssh_keys_generate_keys_become }}"
   block:
     - name: generate | Create ssh key generation directory
-      ansible.builtin.file:
+      file:
         path: "{{ item.path | dirname }}"
-        # owner: "{{ item.owner }}"
+        owner: "{{ item.owner }}"
         group: "{{ item.group | default(item.owner) }}"
         mode: 0700
         state: directory
