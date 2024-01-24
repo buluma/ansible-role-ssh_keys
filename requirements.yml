@@ -2,6 +2,7 @@
 roles:
   - name: buluma.bootstrap
   - name: buluma.core_dependencies
+  - name: buluma.openssl
 collections:
   - name: ansible.posix
   - name: community.crypto
