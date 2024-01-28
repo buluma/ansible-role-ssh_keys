@@ -4,9 +4,11 @@
   become: yes
   gather_facts: no
 
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  
   roles:
     - role: buluma.bootstrap
     - role: buluma.core_dependencies
     - role: buluma.openssl
-      vars:
-        ansible_python_interpreter: /usr/bin/python3
+
