@@ -1,6 +1,6 @@
 # tasks file
 ---
-- name: authorized-keys | Authorized-keys | set up for users
+- name: authorized-keys | Set up for users
   ansible.posix.authorized_key:
     user: "{{ item.owner }}"
     key: "{{ lookup('file', item.src) }}"
