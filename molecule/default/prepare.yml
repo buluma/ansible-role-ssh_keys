@@ -6,9 +6,11 @@
 
   # vars:
   #   ansible_python_interpreter: /bin/python3
-  
+
   roles:
     - role: buluma.bootstrap
     - role: buluma.core_dependencies
+    - role: buluma.buildtools
+    - role: buluma.epel
+    - role: buluma.python_pip
     - role: buluma.openssl
-
